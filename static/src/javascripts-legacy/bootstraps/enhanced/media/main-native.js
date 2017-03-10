@@ -11,7 +11,8 @@ define([
     'common/modules/video/events',
     'common/modules/video/metadata',
     'common/modules/video/onward-container',
-    'common/modules/video/more-in-series-container'
+    'common/modules/video/more-in-series-container',
+    'projects/video/player'
 ], function (
     $,
     config,
@@ -23,7 +24,8 @@ define([
     mediaEvents,
     mediaMetadata,
     onwardContainer,
-    moreInSeriesContainer
+    moreInSeriesContainer,
+    videoPlayer
 ) {
     function getMediaElements() {
         return fastdomPromise.read(function () {
@@ -116,7 +118,7 @@ define([
 
     function initMediaElement(el) {
         // style element
-
+        videoPlayer(el);
         initEndSlate(el);
     }
 

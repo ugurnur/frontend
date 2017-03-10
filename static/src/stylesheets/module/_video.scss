@@ -1,0 +1,156 @@
+.gvideo {
+    position: relative;
+    display: flex;
+    font-family: $f-sans-serif-text;
+    font-size: 12px;
+}
+
+.gvideo:not(.is-playing) .symbol--pause,
+.gvideo.is-playing .symbol--play,
+.gvideo.is-muted .symbol--sound,
+.gvideo.is-muted .symbol--fsound,
+.gvideo.is-fsound .symbol--muted,
+.gvideo.is-fsound .symbol--sound,
+.gvideo:not(.is-muted):not(.is-fsound) .symbol--muted,
+.gvideo:not(.is-muted):not(.is-fsound) .symbol--fsound {
+    display: none;
+}
+
+.gvideo__controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.gvideo__video {
+    flex: 1;
+    max-width: 100%;
+}
+
+.vcontrols {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+}
+
+.vcontrols__progress {
+    -webkit-appearance: none;
+
+    height: 6px;
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.vcontrols__progress::-webkit-progress-bar {
+    background: #000;
+}
+
+.vcontrols__progress::-webkit-progress-value {
+    background: #ffbb00;
+}
+
+.vcontrols__time {
+    margin-right: auto;
+}
+
+.vcontrols__time__duration {
+    color: #bdbdbd;
+}
+
+.vcontrols__link,
+.vcontrols__link:hover,
+.vcontrols__link:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+.vcontrols__button {
+    -webkit-appearance: none;
+
+    background: none;
+    border: 0;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.vcontrols__with-icon svg {
+    fill: #fff;
+    position: static;
+    width: initial;
+    height: initial;
+}
+
+.vcontrols__with-icon path {
+    fill: inherit;
+}
+
+.vcontrols__with-icon:hover svg {
+    fill: #ffbb00;
+}
+
+.vcontrols__play {
+    margin-right: 8px;
+}
+
+.vcontrols__play svg {
+    background: #ffbb00;
+    border-radius: 50%;
+}
+
+.vcontrols__play svg,
+.vcontrols__play:hover svg {
+    fill: #333;
+}
+
+.vcontrols__sound {
+    -webkit-appearance: none;
+    background: none;
+    outline: none;
+    margin: 0 8px;
+}
+
+.vcontrols__sound::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #ffbb00;
+  width: 1px;
+  height: 11px;
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+.vcontrols__sound::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    cursor: pointer;
+}
+
+.vcontrols__fullscreen {
+    margin-left: 12px;
+}
+
+.vcontrols__embed {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.vcontrols__embed .symbol--embed {
+    margin-right: 8px;
+    width: 20px;
+    height: 12px;
+}
+
+/* TODO: download progress */
+.vcontrols__dprogress {
+    display: none;
+}
