@@ -185,7 +185,7 @@ trait ABTestSwitches {
     "ab-native-video",
     "Test video experience without videojs",
     owners = Seq(Owner.withGithub("akash1810")),
-    safeState = Off,
+    safeState = On,
     sellByDate = new LocalDate(2017, 4, 1),
     exposeClientSide = true
   )
