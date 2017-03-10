@@ -1,6 +1,6 @@
 define([
     'lib/add-event-listener',
-    'raw-loader!video/toolbar.html'
+    'raw-loader!projects/video/toolbar.html'
 ], function (addEventListener, toolbarHtml) {
     var requestFullscreen = (function () {
         var video = document.createElement('video');
@@ -17,11 +17,10 @@ define([
 
     return initVideo;
 
-    function initVideo(container) {
-
-        var toolbar = initToolbar(container);
-
-        var video = Video(container);
+    function initVideo(videoEl) {
+        var container = videoEl.parentNode;
+        initToolbar(container);
+        var video = Video(videoEl, container);
 
         addEventListener(video.play, 'click', function () {
             if( video.media.paused ) {
@@ -69,21 +68,25 @@ define([
         });
 
         addEventListener(video.media, 'loadedmetadata', function () {
-            let duration = controls.querySelector('.vcontrols__time__duration');
+            var duration = video.controls.querySelector('.vcontrols__time__duration');
             duration.textContent = formatTime(video.media.duration);
         }, { once: true });
     }
 
-    function Video(container) {
+    function Video(videoEl, container) {
+        videoEl.controls = false;
+        videoEl.classList.add('gvideo__video');
+        container.classList.add('gvideo');
+
         return Object.freeze({
-            controls : container.querySelector('.gvideo__controls');
-            media    : container.querySelector('.gvideo__video'),
-            play     : controls.querySelector('.vcontrols__play'),
-            progress : controls.querySelector('.vcontrols__progress'),
-            mute     : controls.querySelector('.vcontrols__mute'),
-            sound    : controls.querySelector('.vcontrols__sound'),
-            fscreen  : controls.querySelector('.vcontrols__fullscreen'),
-            elapsed  : controls.querySelector('.vcontrols__time__elapsed')
+            controls : container.querySelector('.gvideo__controls'),
+            media    : videoEl,
+            play     : container.querySelector('.vcontrols__play'),
+            progress : container.querySelector('.vcontrols__progress'),
+            mute     : container.querySelector('.vcontrols__mute'),
+            sound    : container.querySelector('.vcontrols__sound'),
+            fscreen  : container.querySelector('.vcontrols__fullscreen'),
+            elapsed  : container.querySelector('.vcontrols__time__elapsed')
         });
     }
 
@@ -97,7 +100,7 @@ define([
         if (!stubToolbar) {
             stubToolbar = document.createElement('div');
             stubToolbar.className = 'gvideo__controls vcontrols';
-            stubToolbar.innerHtml = toolbarHtml;
+            stubToolbar.innerHTML = toolbarHtml;
         }
 
         container.appendChild(stubToolbar.cloneNode(true));
