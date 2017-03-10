@@ -25,7 +25,8 @@ define([
     'bootstraps/enhanced/media/video-player',
     'raw-loader!common/views/ui/loading.html',
     'commercial/modules/user-features',
-    'lib/load-script'
+    'lib/load-script',
+    'lib/add-event-listener'
 ], function (
     bean,
     bonzo,
@@ -53,7 +54,8 @@ define([
     videojs,
     loadingTmpl,
     userFeatures,
-    loadScript
+    loadScript,
+    addEventListener
 ) {
     function initLoadingSpinner(player) {
         player.loadingSpinner.contentEl().innerHTML = loadingTmpl;
@@ -176,9 +178,10 @@ define([
             }
         }));
 
-        events.addContentEvents(player, mediaId, mediaType);
-        events.addPrerollEvents(player, mediaId, mediaType);
-        events.bindGoogleAnalyticsEvents(player, gaEventLabel);
+        // TODO add tracking before videojs initialisation
+        events.addContentEvents(el, mediaId, mediaType);
+        events.addPrerollEvents(el, mediaId, mediaType);
+        events.bindGoogleAnalyticsEvents(el, gaEventLabel);
 
         videoMetadata.getVideoInfo($el).then(function(videoInfo) {
             if (videoInfo.expired) {
@@ -212,7 +215,7 @@ define([
                         withPreroll = shouldPreroll && !blockVideoAds;
 
                         // Location of this is important.
-                        events.bindErrorHandler(player);
+                        events.bindVideoJSErrorHandler(player);
                         player.guMediaType = mediaType;
 
                         playerSetupComplete = new Promise(function (resolve) {
@@ -220,11 +223,11 @@ define([
                                 var vol;
 
                                 deferToAnalytics(function () {
-                                    events.initOphanTracking(player, mediaId);
-                                    events.bindGlobalEvents(player);
-                                    events.bindContentEvents(player);
+                                    events.initOphanTracking(el, mediaId);
+                                    events.bindGlobalEvents(el);
+                                    events.bindContentEvents(el);
                                     if (withPreroll) {
-                                        events.bindPrerollEvents(player);
+                                        events.bindPrerollEvents(el);
                                     }
                                 });
 
@@ -245,7 +248,7 @@ define([
                                     player.fullscreener();
 
                                     if (showEndSlate && detect.isBreakpoint({ min: 'desktop' })) {
-                                        initEndSlate(player, endSlateUri);
+                                        initEndSlate(el, player, endSlateUri);
                                     }
 
                                     if (withPreroll) {
@@ -311,13 +314,13 @@ define([
         return player;
     }
 
-    function initEndSlate(player, endSlatePath) {
+    function initEndSlate(el, player, endSlatePath) {
         var endSlate = new Component(),
             endStateClass = 'vjs-has-ended';
 
         endSlate.endpoint = endSlatePath;
 
-        player.one(events.constructEventName('content:play', player), function () {
+        addEventListener(el, events.constructEventName('content:play', el), function () {
             endSlate.fetch(player.el(), 'html');
 
             player.on('ended', function () {

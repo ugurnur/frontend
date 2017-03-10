@@ -11,7 +11,9 @@ define([
     'lodash/functions/throttle',
     'lodash/objects/forOwn',
     'common/modules/video/ga-helper',
-    'ophan/ng'
+    'ophan/ng',
+    'lib/add-event-listener',
+    'lib/dispatch-event'
 ], function (
     bean,
     qwery,
@@ -25,7 +27,9 @@ define([
     throttle,
     forOwn,
     gaHelper,
-    ophan
+    ophan,
+    addEventListener,
+    dispatchEvent
 ) {
     var isDesktop = detect.isBreakpoint({ min: 'desktop' }),
         isEmbed = !!window.guardian.isEmbed,
@@ -40,7 +44,7 @@ define([
             'content:play',
             'content:end'
         ],
-        gaTracker = config.googleAnalytics.trackers.editorial;
+        gaTracker = config.googleAnalytics.trackers.editorialTest;
 
     /**
      *
@@ -59,13 +63,17 @@ define([
         };
     }
 
+    function addOnceEventListener(el, name, handler) {
+        addEventListener(el, name, handler, {once: true});
+    }
+
     function bindCustomMediaEvents(eventsMap, player, mediaId, mediaType, isPreroll) {
         forOwn(eventsMap, function(value, key) {
             var fullEventName = 'media:' + value;
             var mediaEvent = MediaEvent(mediaId, mediaType, value, isPreroll);
 
-            player.one(key, function() {
-                player.trigger(fullEventName, mediaEvent);
+            addOnceEventListener(player, key, function() {
+                dispatchEvent(player, fullEventName, mediaEvent);
                 mediator.emit(fullEventName, mediaEvent);
             });
         });
@@ -81,17 +89,17 @@ define([
             ended: 'end'
         };
 
-        player.on('timeupdate', throttle(function() {
-            var percent = Math.round((player.currentTime() / player.duration()) * 100);
+        addEventListener(player, 'timeupdate', throttle(function() {
+            var percent = Math.round((player.currentTime / player.duration) * 100);
 
             if (percent >= 25) {
-                player.trigger('passed25');
+                dispatchEvent(player, 'passed25');
             }
             if (percent >= 50) {
-                player.trigger('passed50');
+                dispatchEvent(player, 'passed50');
             }
             if (percent >= 75) {
-                player.trigger('passed75');
+                dispatchEvent(player, 'passed75');
             }
         }, 1000));
 
@@ -123,19 +131,29 @@ define([
         Object.keys(events).map(function(eventName) {
             return 'media:' + eventName;
         }).forEach(function(playerEvent) {
-            player.on(playerEvent, function(_, mediaEvent) {
-                window.ga(gaTracker + '.send', 'event', gaHelper.buildGoogleAnalyticsEvent(mediaEvent, events, canonicalUrl,
-                    'guardian-videojs', gaHelper.getGoogleAnalyticsEventAction, mediaEvent.mediaId));
+            addEventListener(player, playerEvent, function(mediaEvent) {
+                window.ga(
+                    gaTracker + '.send',
+                    'event',
+                    gaHelper.buildGoogleAnalyticsEvent(
+                        mediaEvent.detail,
+                        events,
+                        canonicalUrl,
+                        'guardian-videojs',
+                        gaHelper.getGoogleAnalyticsEventAction,
+                        mediaEvent.detail.mediaId
+                    )
+                );
             });
         });
     }
 
     function getMediaType(player) {
-        return isEmbed ? 'video' : player.guMediaType;
+        return isEmbed ? 'video' : player.tagName.toLowerCase();
     }
 
     function shouldAutoPlay(player) {
-        return isDesktop && !history.isRevisit(config.page.pageId) && player.guAutoplay;
+        return isDesktop && !history.isRevisit(config.page.pageId) && player.getAttribute('data-auto-play') === 'true';
     }
 
     function constructEventName(eventName, player) {
@@ -167,7 +185,7 @@ define([
         EVENTS.concat(QUARTILES.map(function (q) {
             return 'content:' + q;
         })).forEach(function (event) {
-            player.one(constructEventName(event, player), function (event) {
+            addOnceEventListener(player, constructEventName(event, player), function (event) {
                 ophanRecord(mediaId, event, player);
             });
         });
@@ -176,22 +194,22 @@ define([
     function bindPrerollEvents(player) {
         var events = {
             end: function () {
-                player.trigger(constructEventName('preroll:end', player));
+                dispatchEvent(player, constructEventName('preroll:end', player));
                 bindContentEvents(player, true);
             },
             start: function () {
                 var duration = player.duration();
                 if (duration) {
-                    player.trigger(constructEventName('preroll:play', player));
+                    dispatchEvent(player, constructEventName('preroll:play', player));
                 } else {
-                    player.one('durationchange', events.start);
+                    addOnceEventListener(player, 'durationchange', events.start);
                 }
             },
             ready: function () {
-                player.trigger(constructEventName('preroll:ready', player));
+                dispatchEvent(player, constructEventName('preroll:ready', player));
 
-                player.one('adstart', events.start);
-                player.one('adend', events.end);
+                addOnceEventListener(player, 'adstart', events.start);
+                addOnceEventListener(player, 'adend', events.end);
 
                 if (shouldAutoPlay(player)) {
                     player.play();
@@ -208,11 +226,11 @@ define([
             player.off('adserror', adFailed);
         };
 
-        player.one('adsready', events.ready);
+        addOnceEventListener(player, 'adsready', events.ready);
 
         //If no preroll avaliable or preroll fails, cancel ad framework and init content tracking.
-        player.one('adtimeout', adFailed);
-        player.one('adserror', adFailed);
+        addOnceEventListener(player, 'adtimeout', adFailed);
+        addOnceEventListener(player, 'adserror', adFailed);
     }
 
     function kruxTracking(player, event) {
@@ -242,21 +260,21 @@ define([
     function bindContentEvents(player) {
         var events = {
             end: function () {
-                player.trigger(constructEventName('content:end', player));
+                dispatchEvent(player, constructEventName('content:end', player));
             },
             play: function () {
-                var duration = player.duration();
+                var duration = player.duration;
                 if (duration) {
-                    player.trigger(constructEventName('content:play', player));
+                    dispatchEvent(player, constructEventName('content:play', player));
                 } else {
-                    player.one('durationchange', events.play);
+                    addOnceEventListener(player, 'durationchange', events.play);
                 }
             },
             timeupdate: function () {
-                var progress = Math.round(parseInt(player.currentTime() / player.duration() * 100, 10));
+                var progress = Math.round(parseInt(player.currentTime / player.duration * 100, 10));
                 QUARTILES.reverse().some(function (quart) {
                     if (progress >= quart) {
-                        player.trigger(constructEventName('content:' + quart, player));
+                        dispatchEvent(player, constructEventName('content:' + quart, player));
                         return true;
                     } else {
                         return false;
@@ -264,11 +282,11 @@ define([
                 });
             },
             ready: function () {
-                player.trigger(constructEventName('content:ready', player));
+                dispatchEvent(player, constructEventName('content:ready', player));
 
-                player.one('play', events.play);
-                player.on('timeupdate', throttle(events.timeupdate, 1000));
-                player.one('ended', events.end);
+                addOnceEventListener(player, 'play', events.play);
+                addEventListener(player, 'timeupdate', throttle(events.timeupdate, 1000));
+                addOnceEventListener(player, 'ended', events.end);
 
                 if (shouldAutoPlay(player)) {
                     player.play();
@@ -281,14 +299,14 @@ define([
     // These events are so that other libraries (e.g. Ophan) can hook into events without
     // needing to know about videojs
     function bindGlobalEvents(player) {
-        player.on('playing', function () {
+        addEventListener(player, 'playing', function () {
             kruxTracking(player, 'videoPlaying');
             bean.fire(document.body, 'videoPlaying');
         });
-        player.on('pause', function () {
+        addEventListener(player, 'pause', function () {
             bean.fire(document.body, 'videoPause');
         });
-        player.on('ended', function () {
+        addEventListener(player, 'ended', function () {
             bean.fire(document.body, 'videoEnded');
             kruxTracking(player, 'videoEnded');
         });
@@ -312,7 +330,7 @@ define([
         return false;
     }
 
-    function bindErrorHandler(player) {
+    function bindVideoJSErrorHandler(player) {
         player.on('error', function () {
             beaconError(player.error());
             $('.vjs-big-play-button').hide();
@@ -326,7 +344,7 @@ define([
         bindGlobalEvents: bindGlobalEvents,
         initOphanTracking: initOphanTracking,
         handleInitialMediaError: handleInitialMediaError,
-        bindErrorHandler: bindErrorHandler,
+        bindVideoJSErrorHandler: bindVideoJSErrorHandler,
         addContentEvents: addContentEvents,
         addPrerollEvents: addPrerollEvents,
         bindGoogleAnalyticsEvents: bindGoogleAnalyticsEvents

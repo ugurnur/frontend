@@ -110,9 +110,15 @@ define([
         }
 
         if ((config.isMedia || qwery('video, audio').length) && !config.page.isHosted) {
-            require.ensure([], function (require) {
-                bootstrapContext('media', require('bootstraps/enhanced/media/main'));
-            }, 'media');
+            if (ab.isInVariant('NativeVideo', 'variant')) {
+                require.ensure([], function (require) {
+                    bootstrapContext('media', require('bootstraps/enhanced/media/main-native'));
+                }, 'media-native');
+            } else {
+                require.ensure([], function (require) {
+                    bootstrapContext('media', require('bootstraps/enhanced/media/main'));
+                }, 'media');
+            }
         }
 
         if (config.page.contentType === 'Gallery') {

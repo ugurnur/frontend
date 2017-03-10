@@ -179,4 +179,14 @@ trait ABTestSwitches {
     sellByDate = new LocalDate(2017, 3, 17),
     exposeClientSide = true
   )
+
+  Switch(
+    ABTests,
+    "ab-native-video",
+    "Test video experience without videojs",
+    owners = Seq(Owner.withGithub("akash1810")),
+    safeState = Off,
+    sellByDate = new LocalDate(2017, 4, 1),
+    exposeClientSide = true
+  )
 }
