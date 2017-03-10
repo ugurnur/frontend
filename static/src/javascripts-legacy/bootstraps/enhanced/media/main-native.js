@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* global google */
 
 define([
     'lib/$',
