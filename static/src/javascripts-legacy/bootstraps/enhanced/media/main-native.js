@@ -14,6 +14,7 @@ define([
     'common/modules/video/metadata',
     'common/modules/video/onward-container',
     'common/modules/video/more-in-series-container',
+    'common/modules/video/native-preroll',
     'commercial/modules/commercial-features',
     'projects/video/player'
 ], function (
@@ -29,6 +30,7 @@ define([
     mediaMetadata,
     onwardContainer,
     moreInSeriesContainer,
+    nativePreroll,
     commercialFeatures,
     videoPlayer
 ) {
@@ -240,8 +242,8 @@ define([
     }
 
     function initMediaElement(el, mediaInfo) {
-        initPreroll(el, mediaInfo);
-
+        nativePreroll.initPreroll(el, mediaInfo);
+        
         // style element
         videoPlayer(el);
         initEndSlate(el);
