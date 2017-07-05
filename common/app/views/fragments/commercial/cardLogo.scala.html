@@ -1,7 +1,7 @@
 @import com.gu.commercial.branding.Branding
-@import views.html.fragments.commercial.logo
+@import views.html.fragments.commercial.{logo => logoTemplate}
 @(branding: Branding, isStandardSizeCard: Boolean)(implicit request: RequestHeader)
 
 <div class="badge @if(isStandardSizeCard){badge--branded}">
-    @logo(branding)
+    @logoTemplate(branding)
 </div>

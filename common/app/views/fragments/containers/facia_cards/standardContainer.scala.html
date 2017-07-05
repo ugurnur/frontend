@@ -2,7 +2,7 @@
 @import common.commercial.ContainerModel
 @import common.{Edition, Localisation}
 @import views.html.fragments.commercial.containerLogo
-@import views.html.fragments.containers.facia_cards.{containerHeader, showMore, showMoreButton, slice}
+@import views.html.fragments.containers.facia_cards.{containerHeader => fContainerHeader, showMore => fshowMore, showMoreButton => fshowMoreButton, slice => fslice}
 @import views.support.RenderClasses
 
 @(containerDefinition: layout.FaciaContainer,
@@ -10,7 +10,7 @@
   maybeContainerModel: Option[ContainerModel],
   showFrontBranding: Boolean)(implicit request: RequestHeader)
 
-@containerHeader(containerDefinition, frontProperties)
+@fContainerHeader(containerDefinition, frontProperties)
 
 @if(showFrontBranding) {
     @for(commercial <- frontProperties.commercial; frontBranding <- commercial.branding(Edition(request))) {
@@ -39,17 +39,17 @@
          data-id="@containerDefinition.dataId">
 
         @for(sliceWithCards <- containerLayout.slices) {
-            @slice(sliceWithCards, containerDefinition.index, frontProperties = Some(frontProperties))
+            @fslice(sliceWithCards, containerDefinition.index, frontProperties = Some(frontProperties))
         }
 
         @if(containerDefinition.hasShowMore && containerDefinition.hasShowMoreEnabled) {
             @if(containerDefinition.useShowMore) {
                 <div class="js-show-more-placeholder"></div>
 
-                @showMoreButton(containerDefinition.displayName getOrElse "")
+                @fshowMoreButton(containerDefinition.displayName getOrElse "")
             } else {
                 @* Don't hide any items, for on tag pages, which are chronological *@
-                @showMore(
+                @fshowMore(
                     containerDefinition.containerLayout.map(_.remainingCards).getOrElse(Nil),
                     containerDefinition.index
                 )

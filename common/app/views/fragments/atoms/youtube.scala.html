@@ -1,7 +1,7 @@
 @import conf.Configuration.site.host
 @import conf.Configuration.Media
 @import views.support.{RenderClasses, Video700}
-@import views.html.fragments.atoms.mediaAtomCaption
+@import views.html.fragments.atoms.{mediaAtomCaption => mAtomCaption}
 @import com.netaporter.uri.dsl._
 @import model.pressed.CardStyle
 
@@ -112,5 +112,5 @@
 }
 
 @if(displayCaption & !mediaWrapper.contains(ImmersiveMainMedia)) {
-    @mediaAtomCaption(media.title, mediaWrapper.contains(MainMedia))
+    @mAtomCaption(media.title, mediaWrapper.contains(MainMedia))
 }
