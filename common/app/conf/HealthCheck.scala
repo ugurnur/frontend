@@ -69,7 +69,7 @@ private[conf] trait HealthCheckFetcher extends ExecutionContexts with Logging {
   private[conf] def fetchResult(baseUrl: String, healthCheck: SingleHealthCheck): Future[HealthCheckResult] = {
 
     wsClient.url(s"$baseUrl${healthCheck.path}")
-      .withHeaders("User-Agent" -> "GU-HealthChecker", "X-Gu-Management-Healthcheck" -> "true")
+      .withHttpHeaders("User-Agent" -> "GU-HealthChecker", "X-Gu-Management-Healthcheck" -> "true")
       .withRequestTimeout(4.seconds).get()
       .map {
         response: WSResponse =>
@@ -124,7 +124,7 @@ private[conf] class HealthCheckCache(preconditionMaybe: Option[HealthCheckPrecon
 
   private def noRefreshNeededResults(): List[HealthCheckResult] = {
     // No refresh needed for non-expiring results if they have already been fetched successfully
-    cache.get.filter(r => !r.expiration.isDefined && r.result.isInstanceOf[HealthCheckResultTypes.Success])
+    cache.get.filter(r => r.expiration.isEmpty && r.result.isInstanceOf[HealthCheckResultTypes.Success])
   }
 }
 

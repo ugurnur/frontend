@@ -16,7 +16,8 @@ class CorsHttpErrorHandler(
 )(implicit ec: ExecutionContext) extends DefaultHttpErrorHandler(
   environment = environment,
   configuration = configuration,
-  sourceMapper = sourceMapper
+  sourceMapper = sourceMapper,
+  router = None
 ) with Results {
 
   private val varyFields = List("Origin", "Accept")
