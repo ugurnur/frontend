@@ -8,6 +8,37 @@ import NavLinks._
 
 object NavigationHelpers {
 
+  def getNavItem(id: String, edition: Edition): Option[NavItem] = {
+    object PillarsNav extends EditionalisedNavList {
+      lazy val uk = Pillars.all
+      lazy val us = uk
+      lazy val au = uk
+      lazy val int = uk
+    }
+    val root = new NavItem {
+      override val children: Option[EditionalisedNavList] = Some(PillarsNav)
+      override val url: String = ""
+      override val title: String = ""
+      override val id: String = ""
+    }
+
+    def search(navItem: NavItem): List[NavItem] = {
+      if(navItem.id == id) {
+        List(navItem)
+      } else {
+        navItem.children match {
+          case Some(item) => item.getEditionalisedList(edition).flatMap(search)
+          case None => Nil
+        }
+      }
+    }
+
+    search(root).headOption
+  }
+
+
+
+
   def getMembershipLinks(edition: Edition): List[NavLink] = {
     val editionId = edition.id.toLowerCase()
 
@@ -62,10 +93,9 @@ object NavigationHelpers {
       tertiary.getEditionalisedList(edition)
     )
     .getOrElse(
-      item.parent.map( secondary =>
-        secondary.children.map( children =>
+      item.parent.children.map( children =>
 
-          List(item) ++ children.getEditionalisedList(edition)
+          List(secondary) ++ children.getEditionalisedList(edition)
 
         )
         .getOrElse(item.pillar.children.getEditionalisedList(edition))

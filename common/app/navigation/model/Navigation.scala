@@ -3,22 +3,28 @@ package navigation
 import common.Edition
 import common.editions
 
+trait NavItem {
+  val id: String
+  val url: String
+  val title: String
+  val children: Option[EditionalisedNavList]
+}
+
 case class Pillar (
  id: String,
  url: String,
  title: String,
  longDisplayName: String,
  children: EditionalisedNavList
-)
+) extends NavItem
 
 case class NavLink2(
  id: String,
  url: String,
  title: String,
- pillar: Pillar,
- parent: Option[NavLink2],
+ parent: NavItem,
  children: Option[EditionalisedNavList]
-)
+) extends NavItem
 
 trait EditionalisedNavList {
   val uk: List[NavLink2]

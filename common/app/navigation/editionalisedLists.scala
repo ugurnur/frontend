@@ -17,10 +17,10 @@ object OpinionSections extends EditionalisedNavList {
     cartoons,
     inMyOpinion,
     letters,
-    NavLink2("", "/profile/pollytoynbee", "Polly Toynbee", opinionPillar, None, None),
-    NavLink2("", "/profile/owen-jones", "Owen Jones", opinionPillar, None, None),
-    NavLink2("", "/profile/jonathanfreedland", "Jonathan Freedland", opinionPillar, None, None),
-    NavLink2("", "/profile/marinahyde", "Marina Hyde", opinionPillar, None, None)
+    NavLink2("", "/profile/pollytoynbee", "Polly Toynbee", opinionPillar, None),
+    NavLink2("", "/profile/owen-jones", "Owen Jones", opinionPillar, None),
+    NavLink2("", "/profile/jonathanfreedland", "Jonathan Freedland", opinionPillar, None),
+    NavLink2("", "/profile/marinahyde", "Marina Hyde", opinionPillar, None)
   )
   lazy val au = List(
     auColumnists,
@@ -28,17 +28,17 @@ object OpinionSections extends EditionalisedNavList {
     indigenousAustraliaOpinion,
     theGuardianView.copy(title="editorials"),
     letters,
-    NavLink2("", "/profile/first-dog-on-the-moon", "first dog on the moon", opinionPillar, None, None),
-    NavLink2("", "/profile/katharine-murphy", "Katharine Murphy", opinionPillar, None, None)
+    NavLink2("", "/profile/first-dog-on-the-moon", "first dog on the moon", opinionPillar, None),
+    NavLink2("", "/profile/katharine-murphy", "Katharine Murphy", opinionPillar, None)
   )
   lazy val us = List(
     theGuardianView,
     columnists,
     letters,
-    NavLink2("", "/profile/jill-abramson", "Jill Abramson", opinionPillar, None, None),
-    NavLink2("", "/commentisfree/series/jessica-valenti-column", "Jessica Valenti", opinionPillar, None, None),
-    NavLink2("", "/profile/steven-w-thrasher", "Steven W Thrasher", opinionPillar, None, None),
-    NavLink2("", "/profile/richard-wolffe", "Richard Wolffe", opinionPillar, None, None),
+    NavLink2("", "/profile/jill-abramson", "Jill Abramson", opinionPillar, None),
+    NavLink2("", "/commentisfree/series/jessica-valenti-column", "Jessica Valenti", opinionPillar, None),
+    NavLink2("", "/profile/steven-w-thrasher", "Steven W Thrasher", opinionPillar, None),
+    NavLink2("", "/profile/richard-wolffe", "Richard Wolffe", opinionPillar, None),
     inMyOpinion,
     cartoons
   )
@@ -103,12 +103,12 @@ object MoneySubnav extends EditionalisedNavList {
 
 object FootballSubnav extends EditionalisedNavList {
   lazy val uk = List(
-    NavLink2("live scores", "/football/live", "football/live", sportPillar, Some(football), None),
-    NavLink2("tables", "/football/tables", "football/tables", sportPillar, Some(football), None),
-    NavLink2("competitions", "/football/competitions", "football/competitions", sportPillar, Some(football), None),
-    NavLink2("results", "/football/results", "football/results", sportPillar, Some(football), None),
-    NavLink2("fixtures", "/football/fixtures", "football/fixtures", sportPillar, Some(football), None),
-    NavLink2("clubs", "/football/teams", "football/teams", sportPillar, Some(football), None)
+    NavLink2("live scores", "/football/live", "football/live", football, None),
+    NavLink2("tables", "/football/tables", "football/tables", football, None),
+    NavLink2("competitions", "/football/competitions", "football/competitions", football, None),
+    NavLink2("results", "/football/results", "football/results", football, None),
+    NavLink2("fixtures", "/football/fixtures", "football/fixtures", football, None),
+    NavLink2("clubs", "/football/teams", "football/teams", football, None)
   )
   lazy val au = uk
   lazy val us = uk
@@ -117,11 +117,11 @@ object FootballSubnav extends EditionalisedNavList {
 
 object TodaysPaperSubnav extends EditionalisedNavList {
   lazy val uk = List(
-    NavLink2("tone/obituaries", "/tone/obituaries", "obituaries", newsPillar, Some(todaysPaper), None),
-    NavLink2("", "/theguardian/g2", "g2", newsPillar, Some(todaysPaper), None),
-    NavLink2("", "/theguardian/weekend", "weekend", newsPillar, Some(todaysPaper), None),
-    NavLink2("", "/theguardian/theguide", "the guide", newsPillar, Some(todaysPaper), None),
-    NavLink2("", "/theguardian/guardianreview", "saturday review", newsPillar, Some(todaysPaper), None)
+    NavLink2("tone/obituaries", "/tone/obituaries", "obituaries", todaysPaper, None),
+    NavLink2("", "/theguardian/g2", "g2", todaysPaper, None),
+    NavLink2("", "/theguardian/weekend", "weekend", todaysPaper, None),
+    NavLink2("", "/theguardian/theguide", "the guide", todaysPaper, None),
+    NavLink2("", "/theguardian/guardianreview", "saturday review", todaysPaper, None)
   )
   lazy val au = uk
   lazy val us = uk
@@ -130,9 +130,9 @@ object TodaysPaperSubnav extends EditionalisedNavList {
 
 object ObserverSubnav extends EditionalisedNavList {
   lazy val uk = List(
-    NavLink2("", "/theobserver/news/comment", "comment", newsPillar, Some(observer), None),
-    NavLink2("", "/theobserver/new-review", "the new review", newsPillar, Some(observer), None),
-    NavLink2("", "/theobserver/magazine", "observer magazine", newsPillar, Some(observer), None)
+    NavLink2("", "/theobserver/news/comment", "comment", observer, None),
+    NavLink2("", "/theobserver/new-review", "the new review", observer, None),
+    NavLink2("", "/theobserver/magazine", "observer magazine", observer, None)
   )
   lazy val au = uk
   lazy val us = uk
@@ -141,17 +141,17 @@ object ObserverSubnav extends EditionalisedNavList {
 
 object CrosswordsSubnav extends EditionalisedNavList {
   lazy val uk = List(
-    NavLink2("", "/crosswords/crossword-blog", "blog", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/crossword-editor-update", "editor", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/quick", "quick", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/cryptic", "cryptic", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/prize", "prize", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/weekend-crossword", "weekend", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/quiptic", "quiptic", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/genius", "genius", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/speedy", "speedy", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/everyman", "everyman", newsPillar, Some(crosswords), None),
-    NavLink2("", "/crosswords/series/azed", "azed", newsPillar, Some(crosswords), None)
+    NavLink2("", "/crosswords/crossword-blog", "blog", crosswords, None),
+    NavLink2("", "/crosswords/series/crossword-editor-update", "editor", crosswords, None),
+    NavLink2("", "/crosswords/series/quick", "quick", crosswords, None),
+    NavLink2("", "/crosswords/series/cryptic", "cryptic", crosswords, None),
+    NavLink2("", "/crosswords/series/prize", "prize", crosswords, None),
+    NavLink2("", "/crosswords/series/weekend-crossword", "weekend", crosswords, None),
+    NavLink2("", "/crosswords/series/quiptic", "quiptic", crosswords, None),
+    NavLink2("", "/crosswords/series/genius", "genius", crosswords, None),
+    NavLink2("", "/crosswords/series/speedy", "speedy", crosswords, None),
+    NavLink2("", "/crosswords/series/everyman", "everyman", crosswords, None),
+    NavLink2("", "/crosswords/series/azed", "azed", crosswords, None)
   )
   lazy val au = uk
   lazy val us = uk
