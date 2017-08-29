@@ -154,7 +154,7 @@ object NoCache {
 
 case class NoCache[A](action: Action[A]) extends Action[A] {
 
-  implicit val ec: ExecutionContext = ExecutionContexts.executionContext
+  implicit val executionContext: ExecutionContext = ExecutionContexts.executionContext
 
   override def apply(request: Request[A]): Future[Result] = {
 

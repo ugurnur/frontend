@@ -28,10 +28,8 @@ trait FrontendApplicationLoader extends ApplicationLoader {
 
 trait FrontendComponents
   extends LifecycleComponents
-  with ExecutionContextComponent
   with HttpFiltersComponent
   with BuiltInComponents
-  with AhcWSComponents
   with CSRFComponents {
   self: BuiltInComponents =>
 

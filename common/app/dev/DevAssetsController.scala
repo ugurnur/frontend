@@ -5,6 +5,7 @@ import common.Assets.AssetNotFoundException
 import common.ExecutionContexts
 import java.io.File
 
+import controllers.AssetsComponents
 import model.{Cached, NoCache}
 import model.Cached.WithoutRevalidationResult
 import play.api.http.HttpConfiguration.HttpConfigurationProvider
@@ -12,7 +13,9 @@ import play.api.{Configuration, Environment, Mode}
 import play.api.http.{DefaultFileMimeTypes, HttpEntity}
 import play.api.mvc._
 
-class DevAssetsController(val environment: Environment, components: ControllerComponents) extends AbstractController(components) with ExecutionContexts {
+class DevAssetsController(val environment: Environment, components: ControllerComponents) extends AbstractController(components)
+  with AssetsComponents
+  with ExecutionContexts {
 
   // This allows:
   //  - unbuilt javascript to be loaded from src or public folders.
@@ -72,5 +75,5 @@ class DevAssetsController(val environment: Environment, components: ControllerCo
   }
 
   def surveys(file: String): Action[AnyContent] =
-    controllers.Assets.at(path = "/public/surveys", file, aggressiveCaching = false)
+    assets.at(path = "/public/surveys", file, aggressiveCaching = false)
 }

@@ -139,11 +139,11 @@ case class HealthCheckPrecondition(test: () => Boolean, errorMessage: String) {
 }
 
 
-trait HealthCheckController extends Controller {
+trait HealthCheckController extends BaseController {
   def healthCheck(): Action[AnyContent]
 }
 class CachedHealthCheck(policy: HealthCheckPolicy, preconditionMaybe: Option[HealthCheckPrecondition])
-                       (healthChecks: SingleHealthCheck*)
+                       (val controllerComponents: ControllerComponents, healthChecks: SingleHealthCheck*)
                        (implicit wsClient: WSClient)
   extends HealthCheckController with Results with ExecutionContexts with Logging {
 
@@ -171,10 +171,10 @@ class CachedHealthCheck(policy: HealthCheckPolicy, preconditionMaybe: Option[Hea
 }
 
 case class AllGoodCachedHealthCheck(healthChecks: SingleHealthCheck*)(implicit wsClient: WSClient)
-  extends CachedHealthCheck(policy = HealthCheckPolicy.All, preconditionMaybe = None)(healthChecks:_*)
+  extends CachedHealthCheck(policy = HealthCheckPolicy.All, preconditionMaybe = None)(, healthChecks:_*)
 
 case class AnyGoodCachedHealthCheck(healthChecks: SingleHealthCheck*)(implicit wsClient: WSClient)
-  extends CachedHealthCheck(policy = HealthCheckPolicy.Any, preconditionMaybe = None)(healthChecks:_*)
+  extends CachedHealthCheck(policy = HealthCheckPolicy.Any, preconditionMaybe = None)(, healthChecks:_*)
 
 class CachedHealthCheckLifeCycle(
   healthCheckController: CachedHealthCheck,

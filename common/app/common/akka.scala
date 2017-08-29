@@ -10,7 +10,7 @@ object ExecutionContexts extends ExecutionContexts
 
 trait ExecutionContexts {
   //https://www.playframework.com/documentation/2.6.x/Migration26#execution
-  implicit lazy val executionContext: ExecutionContext = play.api.libs.concurrent.Execution.Implicits.defaultContext
+  implicit lazy val executionContext: ExecutionContext = scala.concurrent.ExecutionContext.Implicits.global
 }
 
 object AkkaAgent extends ExecutionContexts {
