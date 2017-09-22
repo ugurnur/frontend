@@ -124,7 +124,7 @@
                 clear: both;
                 padding-top: $gs-baseline / 2;
             }
-            // changes the padding for a half width quote after directly after a half width image
+            // changes the padding for a half width quote directly after a half width image
             & + .element-pullquote.element--halfWidth {
                 margin-top: 0;
             }
@@ -157,6 +157,10 @@
             border-bottom: 0;
             margin-top: $gs-baseline / 2;
             clear: none;
+
+            & + .element-image:not(.element--halfWidth) {
+                clear: left;
+            } 
         }
 
         .inline-quote {
