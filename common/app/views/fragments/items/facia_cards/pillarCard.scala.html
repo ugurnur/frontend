@@ -1,6 +1,14 @@
 @(item: layout.ContentCard, containerIndex: Int, index: Int, visibilityDataAttribute: String, isFirstContainer: Boolean, isList: Boolean)(implicit request: RequestHeader)
 
-@import views.support.GetClasses
+@import layout.{FaciaWidths, FrontendLatestSnap}
+@import model.{CrosswordSvg, InlineImage, InlineSlideshow, InlineVideo, InlineYouTubeMediaAtom, VideoPlayer}
+@import views.html.fragments.items.elements.facia_cards._
+@import views.html.fragments.items.elements.starRating
+@import views.html.fragments.items.facia_cards.meta
+@import views.html.fragments.atoms.youtube
+@import views.html.fragments.media.video
+@import views.support.{CutOut, GetClasses, RemoveOuterParaHtml, RenderClasses, Video640}
+@import Function.const
 
 <div class="@GetClasses.forItem(item, isFirstContainer) @item.cardTypes.classes @if(!item.hasInlineSnapHtml) {js-snappable}"
      @if(item.discussionSettings.isCommentable) {
@@ -26,5 +34,9 @@
 
 @container(item: layout.ContentCard) = {
     <div class="fc-item__container">
+        @if(item.snapStuff.map(_.snapType).contains(FrontendLatestSnap)) {
+            <!-- DREAM SNAP -->
+            @kicker(item.header, List("fc-item__kicker--dreamsnap", "fc-item__kicker--dreamsnap-list"))
+        }
     </div>
 }
