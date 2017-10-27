@@ -24,7 +24,7 @@ const NOTIFICATION_CANCEL = '.js-weekly-cancel-tier';
 const WEEKLY_DETAILS = '.js-weekly-details';
 const WEEKLY_PRODUCT = '.js-weekly-product';
 const UP_SELL = '.js-weekly-up-sell';
-const weekly_INFO = '.js-weekly-info';
+const WEEKLY_INFO = '.js-weekly-info';
 const LOADER = '.js-weekly-loader';
 const IS_HIDDEN_CLASSNAME = 'is-hidden';
 const ERROR = '.js-weekly-error';
@@ -85,7 +85,7 @@ const populateUserDetails = (userDetails: UserDetails): void => {
             userDetails.subscription.card.stripePublicKeyForUpdate
         );
     }
-    $(weekly_INFO).removeClass(IS_HIDDEN_CLASSNAME);
+    $(WEEKLY_INFO).removeClass(IS_HIDDEN_CLASSNAME);
 };
 
 const displayweeklyUpSell = (): void => {
