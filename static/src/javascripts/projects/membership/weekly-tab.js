@@ -21,8 +21,8 @@ const PACKAGE_NEXT_PAYMENT_CONTAINER = '.js-weekly-next-payment-container';
 const PACKAGE_INTERVAL = '.js-weekly-plan-interval';
 const DETAILS_JOIN_DATE = '.js-weekly-join-date';
 const NOTIFICATION_CANCEL = '.js-weekly-cancel-tier';
-const weekly_DETAILS = '.js-weekly-details';
-const weekly_PRODUCT = '.js-weekly-product';
+const WEEKLY_DETAILS = '.js-weekly-details';
+const WEEKLY_PRODUCT = '.js-weekly-product';
 const UP_SELL = '.js-weekly-up-sell';
 const weekly_INFO = '.js-weekly-info';
 const LOADER = '.js-weekly-loader';
@@ -36,7 +36,7 @@ const hideLoader = (): void => {
 const populateUserDetails = (userDetails: UserDetails): void => {
     const glyph = userDetails.subscription.plan.currency;
     $(SUBSCRIBER_ID).text(userDetails.subscription.subscriberId);
-    $(weekly_PRODUCT).text(userDetails.subscription.plan.name);
+    $(WEEKLY_PRODUCT).text(userDetails.subscription.plan.name);
     $(PACKAGE_COST).text(
         formatters.formatAmount(userDetails.subscription.plan.amount, glyph)
     );
@@ -77,7 +77,7 @@ const populateUserDetails = (userDetails: UserDetails): void => {
 
     if (!userDetails.optIn) {
         $(NOTIFICATION_CANCEL).removeClass(IS_HIDDEN_CLASSNAME);
-        $(weekly_DETAILS).addClass(IS_HIDDEN_CLASSNAME);
+        $(WEEKLY_DETAILS).addClass(IS_HIDDEN_CLASSNAME);
     } else if (userDetails.subscription.card) {
         display(
             PAYMENT_FORM,
