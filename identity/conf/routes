@@ -28,6 +28,7 @@ POST        /public/edit                            controllers.EditProfileContr
 GET         /account/edit                           controllers.EditProfileController.displayAccountForm
 GET         /membership/edit                        controllers.EditProfileController.displayMembershipForm
 GET         /digitalpack/edit                       controllers.EditProfileController.displayDigitalPackForm
+GET         /weekly/edit                       controllers.EditProfileController.displayWeeklyForm
 GET         /privacy/edit                           controllers.EditProfileController.displayPrivacyForm
 POST        /account/edit                           controllers.EditProfileController.submitAccountForm
 POST        /privacy/edit                           controllers.EditProfileController.submitPrivacyForm

@@ -39,12 +39,14 @@ class EditProfileController(idUrlBuilder: IdentityUrlBuilder,
   private val publicPage = IdentityPage("/public/edit", "Edit Public Profile")
   private val membershipPage = IdentityPage("/membership/edit", "Membership")
   private val digitalPackPage = IdentityPage("/digitalpack/edit", "Digital Pack")
+  private val weeklyPage = IdentityPage("/weekly/edit", "Weekly")
   private val privacyPage = IdentityPage("/privacy/edit", "Privacy")
 
   def displayPublicProfileForm: Action[AnyContent] = displayForm(publicPage)
   def displayAccountForm: Action[AnyContent] = displayForm(accountPage)
   def displayMembershipForm: Action[AnyContent] = displayForm(membershipPage)
   def displayDigitalPackForm: Action[AnyContent] = displayForm(digitalPackPage)
+  def displayWeeklyForm: Action[AnyContent] = displayForm(weeklyPage)
   def displayPrivacyForm: Action[AnyContent] = displayForm(privacyPage)
 
   private def displayForm(page: IdentityPage) = csrfAddToken {

@@ -1,0 +1,107 @@
+@(user: com.gu.identity.model.User)
+<div class="is-hidden js-weekly-info">
+    <ul class="details-list u-unstyled js-weekly-details">
+        <li class="details-list__item">
+            <div class="fieldset__heading">
+                <h2 class="form__heading">
+                        Subscriber ID
+                </h2>
+            </div>
+            <div class="fieldset__fields">
+                <div class="form-field">
+                    <span id="qa-weekly-join-date" class="js-weekly-subscriber-id"></span>
+                </div>
+            </div>
+        </li>
+        <li class="details-list__item">
+            <div class="fieldset__heading">
+                <h2 class="form__heading">
+                    Subscription product
+                </h2>
+            </div>
+            <div class="fieldset__fields">
+                <div class="form-field">
+                    <span id="qa-weekly-join-date" class="js-weekly-product"></span>
+                </div>
+            </div>
+        </li>
+        <li class="details-list__item">
+            <div class="fieldset__heading">
+                <h2 class="form__heading">
+                    Start date
+                </h2>
+            </div>
+
+            <div class="fieldset__fields">
+                <div class="form-field">
+                    <span id="qa-weekly-join-date" class="js-weekly-join-date"></span>
+                </div>
+            </div>
+        </li>
+        <li class="details-list__item js-weekly-remaining-trial-length-container is-hidden">
+            <div class="fieldset__heading">
+                <h2 class="form__heading">
+                        Trial remaining
+                </h2>
+            </div>
+            <div class="fieldset__fields">
+                <div class="form-field">
+                    <span id="qa-weekly-remaining-trial-length" class="js-weekly-remaining-trial-length"></span>
+                </div>
+            </div>
+        </li>
+        <li class="details-list__item js-weekly-next-payment-container">
+            <div class="fieldset__heading">
+                <h2 class="form__heading">
+                    Payment frequency
+                </h2>
+            </div>
+            <div class="fieldset__fields">
+                <div class="form-field">
+                    <span class="js-weekly-plan-interval"></span>
+                </div>
+            </div>
+        </li>
+        <li class="details-list__item">
+            <div class="fieldset__heading">
+                <h2 class="form__heading">
+                    Payment amount
+                </h2>
+            </div>
+
+            <div class="fieldset__fields">
+                <div class="form-field">
+                    <span id="qa-weekly-payment-cost" class="js-weekly-package-cost"></span>
+                </div>
+            </div>
+        </li>
+        <li class="details-list__item js-weekly-next-payment-container">
+            <div class="fieldset__heading">
+                <h2 class="form__heading">
+                    Next payment date
+                </h2>
+            </div>
+            <div class="fieldset__fields">
+                <div class="form-field">
+                    <span id="qa-weekly-next-payment-date" class="js-weekly-next-payment-date"></span>
+                </div>
+            </div>
+        </li>
+        <li class="details-list__item js-weekly-next-payment-container is-hidden">
+            <div class="fieldset__heading">
+                <h2 class="form__heading">
+                    Next payment amount
+                </h2>
+            </div>
+            <div class="fieldset__fields">
+                <div class="form-field">
+                    <span id="qa-weekly-next-payment-price" class="js-weekly-next-payment-price"></span>
+                    (pro rata)
+                </div>
+            </div>
+        </li>
+    </ul>
+    <div class="js-weekly-card-details is-hidden" data-product="weekly">
+    @views.html.fragments.profile.stripe(user)
+    </div>
+</div>
