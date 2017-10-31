@@ -93,7 +93,7 @@ from scrolling */
 .new-header__logo__svg {
     display: block;
     height: calc(3 / 16 * 170px);
-    margin-bottom: $gs-baseline / 2;
+    margin-bottom: $gs-baseline;
     margin-right: $gs-gutter / 2;
     margin-top: $gs-baseline / 2;
     width: 170px;
@@ -101,6 +101,7 @@ from scrolling */
     @include mq(mobileMedium) {
         height: calc(3 / 16 * 225px);
         width: 225px;
+        margin-bottom: $gs-baseline / 2;
     }
 
     @include mq(mobileLandscape) {
@@ -119,7 +120,7 @@ from scrolling */
 
     @include mq(leftCol) {
         height: calc(3 / 16 * 385px);
-        margin-bottom: -1px;
+        margin-bottom: -24px;
         width: 385px;
     }
 

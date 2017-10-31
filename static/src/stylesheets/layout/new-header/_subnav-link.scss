@@ -1,34 +1,75 @@
 .subnav-link {
     @include fs-textSans(5);
-    color: currentColor;
+    color: $neutral-1;
     display: inline-block;
     font-size: 16px;
-    font-size: 4.9vw;
-    line-height: 1.3em;
+    padding: ($gs-baseline / 4) ($gs-gutter / 2) ($gs-baseline / 2 + $gs-baseline / 4) 0;
+    transition: color 80ms ease-out;
 
-    @include mq(mobileLandscape) {
-        font-size: 19px;
-        max-height: $gs-baseline * 4.8;
+    &:before {
+        border: 1px solid $news-main-2;
+        border-radius: 50%;
+        box-sizing: border-box;
+        content: '';
+        float: left;
+        height: 10px;
+        margin: 7px 2px 0 0;
+        transition: background-color 80ms ease-out, transform 80ms ease-out;
+        width: 10px;
+    }
+
+    @include mq(tablet) {
+        font-size: 17px;
+        letter-spacing: -.04rem;
+        padding: ($gs-baseline / 4) ($gs-gutter / 2 + $gs-gutter / 4) 18px 0;
     }
 
     @include mq(desktop) {
-        // to make sure that the words are not visible on subnav desktop if they fall to the second line
-        margin-bottom: $gs-baseline;
+        font-size: 20px;
     }
 
     &:hover,
     &:focus {
+        color: $neutral-1;
         text-decoration: none;
+
+        &:before {
+            background: $news-main-2;
+            border: 0;
+        }
     }
+
 }
 
 .subnav-link--toggle-more {
     background: transparent;
     border: 0;
-    color: $neutral-3;
-    padding: 0;
+    color: $neutral-2;
+
+    &:before {
+        content: none;
+    }
 }
 
-.subnav-link--current-section {
-    color: #ffffff;
+.subnav__item--current-section .subnav-link {
+    font-weight: 700;
+
+    &:hover:before,
+    &:before {
+        background: $news-main-2;
+        border: 0;
+    }
+}
+
+.subnav__item--current-section ~ .subnav__item > .subnav-link {
+    color: $neutral-1;
+
+    &:hover:before {
+        background: $news-main-2;
+    }
+
+    &:before {
+        background: transparent;
+        border: 1px solid $news-main-2;
+    }
 }

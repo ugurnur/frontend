@@ -1,36 +1,29 @@
 .subnav {
-    background-color: $subnav-grey;
-    color: $neutral-4;
-    max-height: $gs-baseline * 3.4;
+    background-color: #ffffff;
+    color: $neutral-1;
     overflow: hidden;
-    padding: $gs-baseline / 3 $gs-gutter / 2;
-
-    @include mq(mobile) {
-        max-height: $gs-baseline * 3.5;
-        max-height: 13vw;
-    }
+    padding: 0 $gs-gutter / 2;
+    position: relative;
 
     @include mq(mobileLandscape) {
-        padding: $gs-baseline / 2 0;
+        padding: 0;
     }
 
     @include mq(desktop) {
-        max-height: $gs-baseline * 2;
+        padding-top: $gs-baseline / 4;
+        border-bottom: 1px solid $neutral-5;
     }
 
-    // Spacer to prevent text from sitting directly beneath the veggie burger
-    &:before {
-        content: '';
-        float: right;
-        width: $gutter-small + $veggie-burger-small - ($gs-gutter / 2);
-        height: 1px;
-
-        @include mq(mobileMedium) {
-            width: $gutter-medium + $veggie-burger-medium - ($gs-gutter / 2);
-        }
-
-        @include mq(mobileLandscape) {
-            width: $gutter-large + $veggie-burger-medium - ($gs-gutter / 2);
+    @include mq($until: tablet) {
+        &:after {
+            // Dividing line
+            content: '';
+            border-bottom: 1px solid $neutral-5;
+            display: block;
+            left: $gs-gutter / 2;
+            position: absolute;
+            right: 0;
+            top: 33px;
         }
     }
 }
@@ -53,42 +46,6 @@
 }
 
 .subnav__item {
-    display: inline-block;
-
-    &:focus,
-    &:hover {
-        color: #ffffff;
-    }
-
-    @include mq($until: tablet) {
-        > *:after {
-            content: '/';
-            color: rgba(255, 255, 255, .3);
-            display: inline-block;
-            font-size: 1em;
-            pointer-events: none;
-            margin-left: -2px;
-            margin-right: -2px;
-        }
-
-        &:last-child > *:after {
-            content: '';
-        }
-    }
-
-    @include mq(tablet) {
-        > *:before {
-            content: '/';
-            color: rgba(255, 255, 255, .3);
-            display: inline-block;
-            font-size: 1em;
-            pointer-events: none;
-            margin-left: -2px;
-            margin-right: -2px;
-        }
-
-        &:first-child > *:before {
-            content: '';
-        }
-    }
+    display: block;
+    float: left;
 }

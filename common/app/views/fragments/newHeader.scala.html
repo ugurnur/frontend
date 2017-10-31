@@ -93,16 +93,22 @@
                             </a>
                         </li>
                     }
+
+                    <li class="pillars__item">
+                        <a class="pillar-link pillar-link--dropdown hide-until-tablet"
+                            href=""
+                            data-link-name="">
+                                sections
+                        </a>
+                    </li>
                 </ul>
 
                 <label for="main-menu-toggle"
-                       class="veggie-burger js-change-link"
+                       class="veggie-burger js-change-link hide-from-tablet"
                        tabindex="0"
                        data-link-name="nav2 : veggie-burger : show">
                     <span class="veggie-burger__icon"></span>
-                    <span class="@RenderClasses(Map(
-                            "u-h" -> page.metadata.hasSlimHeader
-                        ), "veggie-burger__label")">All sections</span>
+                    <span class="u-h">All sections</span>
                 </label>
 
                 @fragments.nav.newHeaderMenu()
