@@ -1,15 +1,20 @@
 .pillars {
     clear: right;
+    color: #ffffff;
     color: $news-support-1;
     font-size: 0;
     list-style: none;
     margin: 0;
     padding: 0 $gs-gutter / 2;
     width: 100%;
+    transition: color 80ms ease-out;
+
+    &:hover {
+        color: $news-support-1;
+    }
 
     @include mq(mobileLandscape) {
-        padding-left: $gs-gutter;
-        padding-right: $gs-gutter;
+        padding: 0 $gs-gutter;
     }
 
     @include mq(desktop) {
@@ -29,12 +34,22 @@
 }
 
 .pillars__item {
-    box-sizing: border-box;
     display: inline-block;
+
+    &:hover .pillar-link {
+        color: #ffffff;
+    }
+
+    &:first-child .pillar-link {
+        padding-left: 0;
+
+        &:before {
+            content: none;
+        }
+    }
 
     @include mq(desktop) {
         min-width: 0;
-        padding-right: $gs-gutter;
         transition: min-width 200ms ease;
         will-change: min-width;
 
@@ -47,31 +62,8 @@
         }
     }
 
-    > *:after {
-        content: '/';
-        color: $news-main-2;
-        display: inline-block;
-        margin-left: -1px;
-        margin-right: 2px;
-        pointer-events: none;
-
-        // Slashes switch to left hand side for open animation
-        @include mq(desktop) {
-            left: -$gs-gutter / 1.5;
-            margin: 0;
-            position: absolute;
-            top: 0;
-        }
-    }
-
     @include mq($until: desktop) {
-        &:last-child > *:after {
-            display: none;
-        }
-    }
-
-    @include mq(desktop) {
-        &:first-child > *:after {
+        &:last-child > *:be {
             display: none;
         }
     }
