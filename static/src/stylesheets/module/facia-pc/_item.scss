@@ -1,10 +1,9 @@
 .fc-item {
-    padding: $gs-gutter / 4;
 }
 
 .fc-item__kicker {
-    font-size: 14px;
-    padding: .4em .5em .3em;
+    border-right: 1px solid currentColor;
+    padding-right: .5ex;
 }
 
 .fc-item__headline {
