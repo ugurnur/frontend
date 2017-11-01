@@ -11,8 +11,6 @@ $pillars: (
 
     border-top-color: fade-out($accent, 0.25);
     background-color: $background;
-    color: $accent;
-    fill: $accent;
 
     &:hover {
         background-color: darken($background, 3%);
@@ -33,6 +31,10 @@ $pillars: (
 
     .fc-item__sublinks {
         color: $foreground;
+    }
+
+    .inline-icon {
+        fill: $accent;
     }
 }
 
