@@ -22,12 +22,9 @@ $pillars: (
         color: $foreground;
     }
 
-    .fc-item__kicker{
-        color: $accent;
-
-        &:after {
-            color: transparentize($accent, 0.7);
-        }
+    .fc-item__kicker {
+        color: #fff;
+        background-color: $accent;
     }
 
     .fc-item__standfirst {
