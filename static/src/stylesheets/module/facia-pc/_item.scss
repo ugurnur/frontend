@@ -1,4 +1,89 @@
+$fc-item-gutter: $gs-gutter / 4;
+
+/* PC items
+   ==========================================================================
+*/
+
+@mixin fc-item--horizontal($media-width, $media-align: right) {
+    .fc-item__image-container {
+        box-sizing: border-box;
+        padding-left: $gs-gutter * .25;
+    }
+
+    // IE10/11 ignore boxsizing on flex-basis'd element.
+    // Option is extra wrapping div or this slightly overblow selector.
+    .fc-item__content {
+        position: relative;
+
+        > * {
+            box-sizing: border-box;
+            padding-right: $gs-gutter * .75;
+        }
+    }
+
+    .has-flex-wrap & {
+        .fc-item__container {
+            flex-wrap: wrap;
+            @if $media-align == right {
+                flex-direction: row-reverse;
+            } @else {
+                flex-direction: row;
+            }
+        }
+
+        .fc-item__media-wrapper {
+            flex-basis: $media-width;
+        }
+
+        .fc-item__video-fallback {
+            flex-basis: $media-width;
+        }
+
+        .fc-item__content {
+            flex-basis: (100% - $media-width);
+            // DAMN YOU IE10/11 FLEXWRAP BOX SIZING BUG
+            max-width: (100% - $media-width);
+        }
+
+        .fc-item__footer--horizontal {
+            flex-basis: 100%;
+        }
+    }
+
+    .has-no-flex-wrap & {
+        .fc-item__media-wrapper {
+            width: $media-width;
+            float: $media-align;
+        }
+
+        .fc-item__content {
+            width: 100% - $media-width;
+        }
+    }
+
+    &.fc-item--has-no-image .fc-item__content {
+        flex-basis: 100%;
+        max-width: 100%;
+        padding-right: gs-span(3);
+    }
+}
+
 .fc-item {
+    display: flex;
+    flex: 1 1 auto;
+
+    @include mq($until: tablet) {
+        padding-left: $gs-gutter * .5;
+        padding-right: $gs-gutter * .5;
+        box-sizing: border-box;
+    }
+
+    @include mq(tablet) {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: $gs-gutter * .5;
+        margin-right: $gs-gutter * .5;
+    }
 }
 
 .fc-item__kicker {
@@ -8,4 +93,167 @@
 
 .fc-item__headline {
     display: block;
+}
+
+.fc-item__container {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+// Wraps all media elements
+.fc-item__media-wrapper {
+    box-sizing: border-box;
+}
+
+// Wraps all non-media content
+.fc-item__content {
+    box-sizing: border-box;
+    padding-left: $fc-item-gutter;
+    padding-right: $fc-item-gutter;
+}
+
+.fc-item__image-container {
+}
+
+.fc-item__slideshow {
+    picture {
+    }
+
+    img {
+    }
+}
+
+.fc-item__video-play {
+}
+
+.fc-item__live-indicator {
+}
+
+.fc-item__header,
+.item__title,
+.rich-link__header {
+    @include fs-headline(3);
+    font-weight: 500;
+    padding-bottom: .5em;
+
+    .fc-item--has-boosted-title & {
+        @include fs-headline(4, true);
+    }
+}
+
+.fc-item__title,
+.fc-item__byline,
+.fc-item__kicker,
+.rich-link__byline,
+.rich-link__title,
+.rich-link__kicker {
+    font: inherit;
+    line-height: inherit;
+}
+
+.fc-item__title {
+    padding-top: $gs-baseline / 4;
+    padding-bottom: 0;
+    word-wrap: break-word;
+
+    .inline-external-link {
+        svg {
+        }
+    }
+}
+
+.fc-item__title--quoted {
+    .inline-quote {
+        svg {
+        }
+    }
+}
+
+.fc-item__kicker,
+.fc-sublink__kicker,
+.rich-link__kicker {
+}
+
+// dream snaps
+.fc-item__kicker--dreamsnap {
+}
+
+.fc-item__kicker--dreamsnap-list {
+}
+
+.fc-item__byline {
+    margin-bottom: 0;
+}
+
+.fc-item__standfirst {
+    @include fs-headline(1);
+    padding-bottom: .5em;
+    color: $neutral-2;
+    display: none;
+
+    .fc-item--has-boosted-title & {
+        display: none !important;
+    }
+}
+
+.fc-slice__item {
+    margin-bottom: $gs-baseline;
+    display: flex;
+}
+
+// facia cards sizes
+.fc-item--list-mobile {
+}
+
+.fc-item--list-tablet {
+}
+
+.fc-item--list-compact-tablet {
+}
+
+.fc-item--list-media-mobile {
+}
+
+.fc-item--list-media-tablet {
+}
+
+.fc-item--standard-tablet {
+}
+
+.fc-item--third-tablet {
+}
+
+.fc-item--half-tablet {
+}
+
+@mixin fc-item--three-quarters {
+    @include fc-item--horizontal(65.5%); // Works out as same width as 6 col on desktop and 4.5 col on tablet to align with other items
+}
+
+.fc-item--three-quarters-tablet {
+    @include mq(tablet) {
+        @include fc-item--three-quarters;
+    }
+}
+
+.fc-item--three-quarters-right-tablet {
+}
+
+.fc-item--three-quarters-tall-tablet {
+}
+
+.fc-item--full-media-50-tablet {
+}
+
+.fc-item--full-media-75-tablet {
+}
+
+.fc-item--full-media-100-tablet {
+}
+
+.fc-item--fluid-mobile {
+}
+
+.fc-item--fluid-tablet {
 }
