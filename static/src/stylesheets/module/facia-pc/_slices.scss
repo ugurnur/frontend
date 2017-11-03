@@ -1,0 +1,15 @@
+.fc-slice {
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+
+    @include mq(tablet) {
+        overflow: visible; // Prevents height issue in Firefox < 22
+    }
+}
+
+.fc-slice--hl4-h {
+    .has-flex & {
+        flex-direction: row-reverse;
+    }
+}

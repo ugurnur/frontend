@@ -35,6 +35,12 @@ $pillars: (
     .inline-icon {
         fill: $accent;
     }
+
+    .fc-item__container {
+        &:before {
+            background-color: $accent;
+        }
+    }
 }
 
 @each $pillar, $colour in $pillars {
