@@ -5,6 +5,7 @@ $fc-item-gutter: $gs-gutter / 4;
 */
 
 @mixin fc-item--horizontal($media-width, $media-align: right) {
+
     .fc-item__image-container {
         box-sizing: border-box;
         padding-left: $gs-gutter * .25;
@@ -69,8 +70,19 @@ $fc-item-gutter: $gs-gutter / 4;
 }
 
 .fc-item {
-    display: flex;
-    flex: 1 1 auto;
+    @include mq($until: tablet) {
+        width: 100%;
+    }
+
+    @include mq(tablet) {
+        .has-flex & {
+            flex: 1 1 auto;
+        }
+
+        .has-flex-wrap & {
+            display: flex;
+        }
+    }
 
     @include mq($until: tablet) {
         padding-left: $gs-gutter * .5;
@@ -86,19 +98,27 @@ $fc-item-gutter: $gs-gutter / 4;
     }
 }
 
-.fc-item__kicker {
-    border-right: 1px solid currentColor;
-    padding-right: .5ex;
-}
-
-.fc-item__headline {
-    display: block;
+.item,
+.fc-item {
+    
 }
 
 .fc-item__container {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        z-index: 2;
+        // background-color: red;
+    }
 }
 
 // Wraps all media elements
@@ -111,23 +131,6 @@ $fc-item-gutter: $gs-gutter / 4;
     box-sizing: border-box;
     padding-left: $fc-item-gutter;
     padding-right: $fc-item-gutter;
-}
-
-.fc-item__image-container {
-}
-
-.fc-item__slideshow {
-    picture {
-    }
-
-    img {
-    }
-}
-
-.fc-item__video-play {
-}
-
-.fc-item__live-indicator {
 }
 
 .fc-item__header,
@@ -163,25 +166,6 @@ $fc-item-gutter: $gs-gutter / 4;
     }
 }
 
-.fc-item__title--quoted {
-    .inline-quote {
-        svg {
-        }
-    }
-}
-
-.fc-item__kicker,
-.fc-sublink__kicker,
-.rich-link__kicker {
-}
-
-// dream snaps
-.fc-item__kicker--dreamsnap {
-}
-
-.fc-item__kicker--dreamsnap-list {
-}
-
 .fc-item__byline {
     margin-bottom: 0;
 }
@@ -195,65 +179,4 @@ $fc-item-gutter: $gs-gutter / 4;
     .fc-item--has-boosted-title & {
         display: none !important;
     }
-}
-
-.fc-slice__item {
-    margin-bottom: $gs-baseline;
-    display: flex;
-}
-
-// facia cards sizes
-.fc-item--list-mobile {
-}
-
-.fc-item--list-tablet {
-}
-
-.fc-item--list-compact-tablet {
-}
-
-.fc-item--list-media-mobile {
-}
-
-.fc-item--list-media-tablet {
-}
-
-.fc-item--standard-tablet {
-}
-
-.fc-item--third-tablet {
-}
-
-.fc-item--half-tablet {
-}
-
-@mixin fc-item--three-quarters {
-    @include fc-item--horizontal(65.5%); // Works out as same width as 6 col on desktop and 4.5 col on tablet to align with other items
-}
-
-.fc-item--three-quarters-tablet {
-    @include mq(tablet) {
-        @include fc-item--three-quarters;
-    }
-}
-
-.fc-item--three-quarters-right-tablet {
-}
-
-.fc-item--three-quarters-tall-tablet {
-}
-
-.fc-item--full-media-50-tablet {
-}
-
-.fc-item--full-media-75-tablet {
-}
-
-.fc-item--full-media-100-tablet {
-}
-
-.fc-item--fluid-mobile {
-}
-
-.fc-item--fluid-tablet {
 }

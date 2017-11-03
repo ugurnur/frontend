@@ -1,0 +1,3 @@
+@mixin fc-item--three-quarters {
+    @include fc-item--horizontal(65.5%); // Works out as same width as 6 col on desktop and 4.5 col on tablet to align with other items
+}
