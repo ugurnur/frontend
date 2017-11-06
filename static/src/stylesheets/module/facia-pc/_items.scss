@@ -28,7 +28,7 @@
     margin-bottom: $gs-baseline;
 
     @include mq(tablet) {
-        .has-flex &:not(.fc-slice__item--mpu-candidate) {
+        &:not(.fc-slice__item--mpu-candidate) {
             display: flex;
         }
     }
@@ -44,6 +44,9 @@
 }
 
 .fc-item--list-tablet {
+    @include mq(tablet) {
+        @include fc-item--list;
+    }
 }
 
 .fc-item--list-compact-tablet {
@@ -61,7 +64,14 @@
     }
 }
 
+.fc-item--standard-mobile {
+    @include mq($until: tablet) {
+    }
+}
+
 .fc-item--standard-tablet {
+    @include mq(tablet) {
+    }
 }
 
 .fc-item--third-tablet {

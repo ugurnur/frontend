@@ -11,7 +11,7 @@
 
 @import Function.const
 
-<div class="@GetClasses.forItem(item, isFirstContainer) @item.cardTypes.classes @if(!item.hasInlineSnapHtml) {js-snappable}"
+<div class="fc-item--has-sublinks-3 @GetClasses.forItem(item, isFirstContainer) @item.cardTypes.classes @if(!item.hasInlineSnapHtml) {js-snappable}"
     @if(item.discussionSettings.isCommentable) {
         @item.discussionSettings.discussionId.map { id =>
         data-discussion-id="@id"
@@ -176,6 +176,21 @@ data-test-id="facia-card"
                 <div class="fc-item__footer--vertical" aria-hidden="true">@sublinks(item.sublinks)</div>
             }
 
+            <!-- test vertical sublinks content -->
+            <div class="fc-item__footer--vertical" aria-hidden="true">
+                <ul class="fc-sublinks u-unstyled u-faux-block-link__promote">
+                    <li class="fc-sublink tone-analysis--sublink" data-link-name="sublinks | 1">
+                        <h3 class="fc-sublink__title"> <a href="https://www.theguardian.com/world/2017/nov/02/pm-can-ill-afford-sexual-misconduct-scandal-but-even-less-can-she-afford-to-botch-it" class="fc-sublink__link" data-link-name="article"><span class="fc-sublink__kicker">May under pressure</span> 'Ditching Fallon is a start'</a> </h3>
+                    </li>
+                    <li class="fc-sublink tone-news--sublink" data-link-name="sublinks | 2">
+                        <h3 class="fc-sublink__title"> <a href="https://www.theguardian.com/technology/2017/nov/03/mps-demand-twitter-action-over-russian-interference-in-uk-politics" class="fc-sublink__link" data-link-name="article"><span class="fc-sublink__kicker">Twitter</span> MPs demand action over Russian interference in UK politics</a> </h3>
+                    </li>
+                    <li class="fc-sublink tone-news--sublink" data-link-name="sublinks | 3">
+                        <h3 class="fc-sublink__title"> <a href="https://www.theguardian.com/politics/electoralreform" data-link-name="kicker" class="fc-sublink__kicker">Electoral reform</a> <a href="https://www.theguardian.com/politics/2017/nov/03/mps-to-debate-bill-to-reduce-voting-age-to-16" class="fc-sublink__link" data-link-name="article">MPs to debate bill to reduce voting age to 16</a> </h3>
+                    </li>
+                </ul>
+            </div>
+
             @meta(item)
         </div>
 
@@ -194,6 +209,21 @@ data-test-id="facia-card"
         @if(item.sublinks.nonEmpty) {
             <footer class="fc-item__footer--horizontal">@sublinks(item.sublinks)</footer>
         }
+
+        <!-- test horizontal sublinks content -->
+        <footer class="fc-item__footer--horizontal">
+            <ul class="fc-sublinks u-unstyled u-faux-block-link__promote">
+                <li class="fc-sublink tone-analysis--sublink" data-link-name="sublinks | 1">
+                    <h3 class="fc-sublink__title"> <a href="https://www.theguardian.com/world/2017/nov/02/pm-can-ill-afford-sexual-misconduct-scandal-but-even-less-can-she-afford-to-botch-it" class="fc-sublink__link" data-link-name="article"><span class="fc-sublink__kicker">May under pressure</span> 'Ditching Fallon is a start'</a> </h3>
+                </li>
+                <li class="fc-sublink tone-news--sublink" data-link-name="sublinks | 2">
+                    <h3 class="fc-sublink__title"> <a href="https://www.theguardian.com/technology/2017/nov/03/mps-demand-twitter-action-over-russian-interference-in-uk-politics" class="fc-sublink__link" data-link-name="article"><span class="fc-sublink__kicker">Twitter</span> MPs demand action over Russian interference in UK politics</a> </h3>
+                </li>
+                <li class="fc-sublink tone-news--sublink" data-link-name="sublinks | 3">
+                    <h3 class="fc-sublink__title"> <a href="https://www.theguardian.com/politics/electoralreform" data-link-name="kicker" class="fc-sublink__kicker">Electoral reform</a> <a href="https://www.theguardian.com/politics/2017/nov/03/mps-to-debate-bill-to-reduce-voting-age-to-16" class="fc-sublink__link" data-link-name="article">MPs to debate bill to reduce voting age to 16</a> </h3>
+                </li>
+            </ul>
+        </footer>
 
         <a @Html(item.header.url.hrefWithRel) class="u-faux-block-link__overlay js-headline-text" data-link-name="article" tabindex="-1">@RemoveOuterParaHtml(item.header.headline)</a>
     </div>

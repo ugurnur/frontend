@@ -33,7 +33,11 @@ $pillars: (
     }
 
     .inline-icon {
-        fill: $accent;
+        fill: $foreground;
+    }
+
+    .fc-item__meta {
+        color: $foreground;
     }
 
     .fc-item__container {

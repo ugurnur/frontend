@@ -9,7 +9,36 @@
 }
 
 .fc-slice--hl4-h {
-    .has-flex & {
-        flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+
+// reduce type size on q-q-q-q slice if it follows another slice in the same container
+.fc-slice-wrapper + .fc-slice-wrapper {
+    .fc-slice--q-q-q-q {
+        .fc-item--standard-tablet {
+            .fc-item__header {
+                @include mq(tablet) {
+                    @include fs-headline(2, true);
+                }
+            }
+        }
+    }
+}
+
+.fc-slice--h-q-q {
+    .fc-item--half-tablet {
+        .fc-item__standfirst {
+            @include mq(tablet) {
+                display: none;
+            }
+        }
+    }
+
+    .fc-item--standard-tablet {
+        .fc-item__standfirst {
+            @include mq(desktop) {
+                display: flex;
+            }
+        }
     }
 }
