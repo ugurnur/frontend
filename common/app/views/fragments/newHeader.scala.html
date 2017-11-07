@@ -81,6 +81,8 @@
                        data-link-name="nav2 : veggie-burger : show"
                        aria-controls="main-menu">
 
+                <div class="new-header__break"></div>
+
                 <ul class="pillars">
                     @NewNavigation.PrimaryLinks.map { link =>
                         <li class="pillars__item">
@@ -93,22 +95,21 @@
                             </a>
                         </li>
                     }
-
-                    <li class="pillars__item">
-                        <a class="pillar-link pillar-link--dropdown hide-until-tablet"
-                            href=""
-                            data-link-name="">
-                                sections
-                        </a>
-                    </li>
                 </ul>
 
                 <label for="main-menu-toggle"
-                       class="veggie-burger js-change-link hide-from-tablet"
+                       class="js-change-link"
                        tabindex="0"
                        data-link-name="nav2 : veggie-burger : show">
-                    <span class="veggie-burger__icon"></span>
-                    <span class="u-h">All sections</span>
+                    <span class="veggie-burger hide-from-tablet">
+                        <span class="veggie-burger__icon"></span>
+                    </span>
+
+                    <span class="pillar-link pillar-link--dropdown pillar-link--sections">
+                        <span class="u-h">All</span>
+
+                        sections
+                    </span>
                 </label>
 
                 @fragments.nav.newHeaderMenu()
