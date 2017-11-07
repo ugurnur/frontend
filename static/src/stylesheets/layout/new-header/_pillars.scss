@@ -6,7 +6,6 @@
     list-style: none;
     margin: 0;
     padding: 0 $gs-gutter / 2;
-    width: 100%;
     transition: color 80ms ease-out;
 
     &:hover {
@@ -14,7 +13,7 @@
     }
 
     @include mq(mobileLandscape) {
-        padding: 0 $gs-gutter;
+        padding: 0 0 0 $gs-gutter;
     }
 
     @include mq(desktop) {
@@ -53,13 +52,13 @@
         transition: min-width 200ms ease;
         will-change: min-width;
 
-        .new-header--open & {
-            min-width: gs-span(2) + $gs-gutter / 2;
-        }
-
-        .new-header--open &:not(:first-child) {
-            margin-left: $gs-gutter / 2;
-        }
+        // .new-header--open & {
+        //     min-width: gs-span(2) + $gs-gutter / 2;
+        // }
+        //
+        // .new-header--open &:not(:first-child) {
+        //     margin-left: $gs-gutter / 2;
+        // }
     }
 
     @include mq($until: desktop) {

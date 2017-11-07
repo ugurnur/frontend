@@ -1,3 +1,10 @@
+.l-side-margins {
+    &:before,
+    &:after {
+        top: -50px !important;
+    }
+}
+
 .pillar-link {
     @include fs-textSans(5);
     border-bottom: 0 solid $news-main-2;
@@ -18,16 +25,13 @@
         line-height: $veggie-burger-medium - $gs-baseline;
     }
 
-    @include mq(tablet) {
-        font-size: 24px;
+    @include mq(desktop) {
+        font-size: 22px;
         height: $gs-baseline * 5;
         letter-spacing: -.04rem;
         line-height: $gs-baseline * 5;
-        padding: 0 ($gs-gutter) 0 ($gs-gutter / 4);
-    }
-
-    @include mq(leftCol) {
-        padding: 0 ($gs-gutter * 2) 0 ($gs-gutter / 3);
+        padding: 0 0 0 $gs-gutter / 2;
+        width: gs-span(1) + $gs-gutter * 2 + $gs-gutter / 2;
     }
 
     &:before {
@@ -37,24 +41,20 @@
         display: block;
         left: 0;
         position: absolute;
-        top: $gs-baseline + 1;
+        top: $gs-baseline;
 
-        @include mq(tablet) {
-            bottom: -3px;
+        @include mq(desktop) {
+            bottom: -6px;
             top: $gs-baseline * 2;
         }
     }
 
     &:focus,
     &:hover {
-        border-bottom-width: 3px;
+        border-bottom-width: 4px;
         color: #ffffff;
         outline: none;
         text-decoration: none;
-
-        &.pillar-link--dropdown {
-            border-bottom: 0;
-        }
     }
 
     .new-header--slim & {
@@ -70,6 +70,7 @@
     font-weight: 700;
 
     @include mq(desktop) {
+
         .new-header--open & {
             color: $news-support-1;
 
