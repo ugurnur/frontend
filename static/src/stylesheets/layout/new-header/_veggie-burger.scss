@@ -21,6 +21,12 @@
     }
 
     @include mq(tablet) {
+        height: $veggie-burger-large;
+        width: $veggie-burger-large;
+        right: $gutter-large;
+    }
+
+    @include mq(tablet) {
         right: $gutter-large;
     }
 

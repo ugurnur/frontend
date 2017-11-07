@@ -7,8 +7,7 @@
 
 @subNavItem(link: NavLink, id: String, shouldHideUntilDesktop: Boolean) = {
     <li class="@RenderClasses(Map(
-            "hide-until-desktop" -> shouldHideUntilDesktop,
-            "subnav__item--current-section" -> (id == link.uniqueSection)
+            "hide-until-desktop" -> shouldHideUntilDesktop
         ), "subnav__item")">
         <a class="@RenderClasses(Map(
                 "subnav-link" -> true,

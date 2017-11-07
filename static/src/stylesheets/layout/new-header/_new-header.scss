@@ -120,14 +120,15 @@ from scrolling */
 
     @include mq(tablet) {
         height: calc(3 / 16 * 345px);
-        margin-bottom: -5px;
+        margin-bottom: -$gs-gutter;
         margin-top: $gs-baseline + $gs-baseline / 4;
         width: 345px;
     }
 
-    @include mq(leftCol) {
+    @include mq(desktop) {
         height: calc(3 / 16 * 385px);
-        margin-bottom: -24px;
+        margin-top: $gs-baseline + $gs-baseline / 4;
+        margin-bottom: -$gs-gutter * 2;
         width: 385px;
     }
 

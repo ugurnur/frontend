@@ -1,30 +1,22 @@
 .subnav {
     background-color: #ffffff;
+    border-bottom: 1px solid $neutral-5;
     color: $neutral-1;
+    min-height: $veggie-burger-small - ($gs-baseline / 2);
     overflow: hidden;
     padding: 0 $gs-gutter / 2;
     position: relative;
+
+    @include mq(mobileMedium) {
+        min-height: $veggie-burger-medium - $gs-baseline;
+    }
 
     @include mq(mobileLandscape) {
         padding: 0;
     }
 
-    @include mq(desktop) {
-        padding-top: $gs-baseline / 4;
-        border-bottom: 1px solid $neutral-5;
-    }
-
-    @include mq($until: tablet) {
-        &:after {
-            // Dividing line
-            content: '';
-            border-bottom: 1px solid $neutral-5;
-            display: block;
-            left: $gs-gutter / 2;
-            position: absolute;
-            right: 0;
-            top: 33px;
-        }
+    .l-footer & {
+        border-top: 1px solid $neutral-5;
     }
 }
 
