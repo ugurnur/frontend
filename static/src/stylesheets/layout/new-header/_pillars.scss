@@ -1,16 +1,11 @@
 .pillars {
     clear: right;
     color: #ffffff;
-    color: $news-support-1;
     font-size: 0;
     list-style: none;
     margin: 0;
-    padding: 0 $gs-gutter / 2;
-    transition: color 80ms ease-out;
-
-    &:hover {
-        color: $news-support-1;
-    }
+    padding: 0 $gs-gutter / 2
+    width: 100%;
 
     @include mq(mobileLandscape) {
         padding: 0 0 0 $gs-gutter;
