@@ -45,7 +45,6 @@ from scrolling */
         align-items: flex-start;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
         padding-bottom: 0;
     }
 }
@@ -140,6 +139,11 @@ from scrolling */
             width: 170px;
         }
     }
+}
+
+// This is to force the primary links (news, opinion, sport, arts, lifestyle) onto a new line
+.new-header__break {
+    width: 100%;
 }
 
 // Don't show trapezoid on opera mini: https://wp-mix.com/css-target-opera/

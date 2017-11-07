@@ -103,3 +103,11 @@
         transform: translateY(0) rotate(45deg);
     }
 }
+
+.pillar-link--sections {
+    color: #aad8f1;
+
+    @include mq($until: tablet) {
+        @include u-h();
+    }
+}
