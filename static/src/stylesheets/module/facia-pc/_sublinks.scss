@@ -1,7 +1,7 @@
 .fc-sublink {
     position: relative;
     padding-top: $gs-baseline * .25;
-    margin: $gs-baseline * .75 0;
+    margin: 0;
 
     a {
         display: block;
@@ -12,9 +12,9 @@
 
 .fc-sublink__title {
     @include fs-headline(1);
-    padding-top: 0;
-    margin: 0;
     color: $neutral-1;
+    margin: 0;
+    padding: 0;
 
     &:before {
         display: block;
@@ -40,9 +40,22 @@
 
     .fc-sublink {
         flex: 1 1 100%;
+        margin-top: $gs-baseline;
+        margin-bottom: $gs-baseline * .75;
 
         & + * {
-            margin-left: $gs-gutter;
+            margin-left: $gs-gutter * .5;
+        }
+    }
+
+    .fc-sublink:first-child {
+        .fc-sublink__title {
+            margin-left: $gs-gutter * .25;
+            box-sizing: content-box;
+
+            &:before {
+                left: $gs-gutter * .25;
+            }
         }
     }
 }
