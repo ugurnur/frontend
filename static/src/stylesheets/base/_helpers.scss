@@ -44,12 +44,6 @@
     }
 }
 
-.hide-until-desktop {
-    @include mq($until: desktop) {
-        display: none !important;
-    }
-}
-
 // Hide from
 
 .hide-from-mobile-landscape {

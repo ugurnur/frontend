@@ -2,17 +2,16 @@
     background-color: #ffffff;
     border-bottom: 1px solid $neutral-5;
     color: $neutral-1;
-    min-height: $veggie-burger-small - ($gs-baseline / 2);
+    height: $veggie-burger-medium - $gs-baseline;
     overflow: hidden;
     padding: 0 $gs-gutter / 2;
-    position: relative;
-
-    @include mq(mobileMedium) {
-        min-height: $veggie-burger-medium - $gs-baseline;
-    }
 
     @include mq(mobileLandscape) {
         padding: 0;
+    }
+
+    @include mq(tablet) {
+        height: 42px;
     }
 
     .l-footer & {
@@ -40,4 +39,10 @@
 .subnav__item {
     display: block;
     float: left;
+
+    @include mq($until: tablet) {
+        &:nth-child(1n+4):not(:last-child):not(.subnav__item--current-section) {
+            display: none;
+        }
+    }
 }

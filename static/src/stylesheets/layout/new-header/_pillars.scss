@@ -4,8 +4,7 @@
     font-size: 0;
     list-style: none;
     margin: 0;
-    padding: 0 $gs-gutter / 2
-    width: 100%;
+    padding: 0 $gs-gutter / 2;
 
     @include mq(mobileLandscape) {
         padding: 0 0 0 $gs-gutter;
@@ -18,7 +17,6 @@
     }
 
     .new-header--slim & {
-        width: auto;
         order: -1;
 
         @include mq($until: tablet) {
@@ -28,7 +26,8 @@
 }
 
 .pillars__item {
-    display: inline-block;
+    display: block;
+    float: left;
 
     &:hover .pillar-link {
         color: #ffffff;
@@ -39,26 +38,6 @@
 
         &:before {
             content: none;
-        }
-    }
-
-    @include mq(desktop) {
-        min-width: 0;
-        transition: min-width 200ms ease;
-        will-change: min-width;
-
-        // .new-header--open & {
-        //     min-width: gs-span(2) + $gs-gutter / 2;
-        // }
-        //
-        // .new-header--open &:not(:first-child) {
-        //     margin-left: $gs-gutter / 2;
-        // }
-    }
-
-    @include mq($until: desktop) {
-        &:last-child > *:be {
-            display: none;
         }
     }
 }

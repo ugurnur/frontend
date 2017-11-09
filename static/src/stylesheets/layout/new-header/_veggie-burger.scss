@@ -4,8 +4,8 @@
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .08);
     color: $guardian-brand-dark;
     cursor: pointer;
-    height: $veggie-burger-small;
-    min-width: $veggie-burger-small;
+    height: $veggie-burger-medium;
+    width: $veggie-burger-medium;
     position: absolute;
     border: 0;
     border-radius: 50%;
@@ -14,19 +14,13 @@
     user-select: none;
     z-index: 1;
 
-    @include mq(mobileMedium) {
-        height: $veggie-burger-medium;
-        width: $veggie-burger-medium;
-        right: $gutter-medium;
+    @include mq(mobileLandscape) {
+        right: $gutter-medium;;
     }
 
     @include mq(tablet) {
         height: $veggie-burger-large;
         width: $veggie-burger-large;
-        right: $gutter-large;
-    }
-
-    @include mq(tablet) {
         right: $gutter-large;
     }
 
@@ -42,12 +36,15 @@
     }
 
     .new-header--slim & {
-        height: $veggie-burger-medium;
+        height: $veggie-burger-large;
         margin-bottom: -$gs-baseline;
-        position: relative;
         right: $gs-gutter / 2;
         top: -$gs-baseline / 2;
-        width: $veggie-burger-medium;
+        width: $veggie-burger-large;
+
+        @include mq(mobileLandscape) {
+            right: $gs-gutter;
+        }
     }
 }
 
@@ -72,11 +69,11 @@
     }
 
     &:before {
-        top: -6px;
+        top: -$gs-baseline / 2;
     }
 
     &:after {
-        bottom: -6px;
+        bottom: -$gs-baseline / 2;
     }
 
     // transform burger into cross
