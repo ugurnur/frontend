@@ -7,7 +7,8 @@
     behaviour: Option[String],
     field: Field,
     extraFields: Option[List[play.twirl.api.HtmlFormat.Appendable]] = None,
-    footer: Option[Html] = None
+    footer: Option[Html] = None,
+    vertical: Option[String] = None
 )(implicit handler: views.html.helper.FieldConstructor, messages: play.api.i18n.Messages)
 
 <label class="
@@ -17,8 +18,11 @@
         case Some("newsletter") => "js-manage-account__newsletterCheckbox"
         case _ =>
     }}
-">
-    <div class="manage-account__switch-content">
+    @{vertical.map(name=>{
+        s"manage-account__switch--vertical manage-account__switch--vertical--$name"
+    })}
+    ">
+    <div class="manage-account__switch-header">
         @fragments.form.checkbox(field, Checkbox(field).args:_*)
         <div class="manage-account__switch-checkbox"></div>
         <h3 class="manage-account__switch-title">
@@ -27,18 +31,23 @@
                 <strong>@subheading</strong>
             }
         </h3>
-        @if(description) {
-            <p class="manage-account__switch-copy">
-                @description
-            </p>
-        }
-        @if(extraFields.isDefined){
-            @extraFields
-        }
-        @if(footer.isDefined) {
-            <div class="manage-account__switch-footer">
-                @footer
-            </div>
+        @if(vertical.isDefined) {
+            @fragments.inlineSvg("marque-36", "icon")
         }
     </div>
+    @if(description.isDefined) {
+        <div class="manage-account__switch-content">
+            <p class="manage-account__switch-copy">
+            @description
+            </p>
+            @if(footer.isDefined) {
+                <div class="manage-account__switch-footer">
+                @footer
+                </div>
+            }
+        </div>
+    }
+    @if(extraFields.isDefined){
+        @extraFields
+    }
 </label>
