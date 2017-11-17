@@ -13,7 +13,7 @@
         @newsletter.frequency
     </div>
     @if(newsletter.exampleUrl.isDefined){
-        <a target="preview-email-@newsletter.listId" href="@LinkTo({ newsletter.exampleUrl.getOrElse("") })">
+        <a target="preview-email-@newsletter.listId" class="manage-account__switch-footer-tidbit manage-account__switch-footer-tidbit--no-icon" href="@LinkTo({ newsletter.exampleUrl.getOrElse("") })">
             See the latest email
         </a>
     }
@@ -33,5 +33,6 @@
             value = Some(newsletter.subscribedTo(emailSubscriptions).toString())
         ),
         extraFields = None,
-        footer = Some(buildFooter(newsletter))
+        footer = Some(buildFooter(newsletter)),
+        vertical = newsletter.subheading
     )(nonInputFields, messages)

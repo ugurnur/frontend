@@ -189,21 +189,29 @@ $checkbox-size: $gs-gutter / 1.25;
     flex: 1 1 auto;
 }
 
+.manage-account__switch-footer {
+    margin-top: $local-gutter * 2;
+}
+
 .manage-account__switch-footer-tidbit {
     @include fs-textSans(1);
     opacity: .75;
+    padding: ($local-gutter * .25) 0;
+    padding-left: 1.25em;
+    position: relative;
     svg {
         vertical-align: -10%;
         margin-right: .25em;
+        width: 1em;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom:0;
+        margin: auto;
     }
-}
-
-.manage-account__switch-footer {
-    margin-top: $local-gutter * 2;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-
+    &--no-icon {
+        padding-left: 1.25em;
+    }
 }
 
 @keyframes manage-account__switch-anim-loading {
